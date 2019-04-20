@@ -1,37 +1,42 @@
-let path = 'https://source.unsplash.com/collection/1538150/';
+// let path = 'https://source.unsplash.com/collection/1538150/';
 
-let
-    img1 = new Image(),
-    img2 = new Image(),
-    img3 = new Image(),
-    img4 = new Image();
 
-xSize = Math.floor(Math.random() * 150) + 150,
-    xResize = 600 - xSize,
-    xOffset = xSize - 300,
-    ySize = Math.floor(Math.random() * 200) + 100,
-    yResize = 400 - ySize,
-    yOffset = ySize - 200;
+function img(){
+img_url = 'https://source.unsplash.com/collection/1538150/';
 
-img1.onload=() => document.getElementById('canvas').getContext('2d');
-img1.crossOrigin = 'anonymous';
-img1.src = path + xSize + 'x' + ySize;
+    const width = getRandomInt(150, 400);
+    const height = getRandomInt(100, 300);
 
-img1.onload = () => document.getElementById('canvas').getContext('2d').
-drawImage(img1, 0, 0);
-img2.crossOrigin = 'anonymous';
-img2.src = path + xSize + 'x' + yResize;
-img2.onload = () => document.getElementById('canvas').getContext('2d').
-drawImage(img2, 0, 200 + yOffset);
-img3.crossOrigin = 'anonymous';
-img3.src = path + xResize + 'x' + ySize;
-img3.onload =() => document.getElementById('canvas').getContext('2d').
-drawImage(img3, 300 + xOffset, 0);
-img4.crossOrigin = 'anonymous';
-img4.src = path + xResize + 'x' + yResize;
-img4.onload = () => document.getElementById('canvas').getContext('2d').
-drawImage(img4, 300 + xOffset, 200 + yOffset);
+    var img1 = new Image();
+    img1.crossOrigin = 'anonymous';
+    img1.src = img_url + width + 'x' + height;
+    img1.onload = function(){
+        ctx.drawImage(img1, 0 , 0, width, height );
+    };
 
+    var img2 = new Image();
+    img2.crossOrigin = 'anonymous';
+    img2.src = img_url + (600-width) + 'x' + height;
+    img2.onload = function(){
+        ctx.drawImage(img2, width, 0, 600 - width, height);
+    };
+
+    var img3 = new Image();
+    img3.crossOrigin = 'anonymous';
+    img3.src = img_url + (width - 50)+ 'x' + (400 - height);
+    img3.onload = function(){
+        ctx.drawImage(img3, 0 , height, width - 50, 400 - height);
+    };
+
+    var img4 = new Image();
+    img4.crossOrigin = 'anonymous';
+    img4.src = img_url + (600 - width) + 'x' + (400 - height);
+    img4.onload = function(){
+        ctx.drawImage(img4, width - 50 , height, 650 - width, 400 - height);
+    };
+
+}
+window.onload = img();
 const data = JSON.parse(getQuote());
 document.body.appendChild(canvas);
 //let ctx  = canvas.getContext('2d');
