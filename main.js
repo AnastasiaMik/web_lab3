@@ -34,28 +34,28 @@ drawImage(img4, 300 + xOffset, 200 + yOffset);
 
 const data = JSON.parse(getQuote());
 document.body.appendChild(canvas);
-let ctx  = canvas.getContext('2d');
+//let ctx  = canvas.getContext('2d');
 
 function addText() {
 
     let mas = data[0].quote.split(' ');
 
     let countOfLines = Math.ceil(mas.length / 7);
-    ctx.textAlign = 'center';
+    document.getElementById('canvas').getContext('2d').textAlign = 'center';
 
     for (var i = 0; i < countOfLines; i++) {
-        ctx.fillText(masToString(mas.slice(i * 7, (i + 1) * 7)), 300, 100 + 200 / (countOfLines + 1) * (i + 1))
+        document.getElementById('canvas').getContext('2d').fillText(masToString(mas.slice(i * 7, (i + 1) * 7)), 300, 100 + 200 / (countOfLines + 1) * (i + 1))
     }
-    ctx.textAlign = 'right';
-    ctx.fillText('(c) ' + data[0].character, 590, 380);
+    document.getElementById('canvas').getContext('2d').textAlign = 'right';
+    document.getElementById('canvas').getContext('2d').fillText('(c) ' + data[0].character, 590, 380);
 }
 
 function fillText() {
-    ctx.font = 'Bold 18px Arial';
+    document.getElementById('canvas').getContext('2d').font = 'Bold 18px Arial';
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
-    ctx.fillRect(0, 0, 600, 400);
-    ctx.fillStyle = "white";
+    document.getElementById('canvas').getContext('2d').fillStyle = "rgba(0, 0, 0, 0.3)";
+    document.getElementById('canvas').getContext('2d').fillRect(0, 0, 600, 400);
+    document.getElementById('canvas').getContext('2d').fillStyle = "white";
     addText()
 }
 
