@@ -43,3 +43,57 @@ img_url = 'https://source.unsplash.com/collection/1538150/';
 }
 window.onload = img();
 
+function getQuote() {
+    let response = null;
+    const request = new XMLHttpRequest();
+    request.open('GET', 'https://thesimpsonsquoteapi.glitch.me/quotes', false);
+    request.send();
+    if (request.status !== 200) {
+        alert(request.status + ': ' + request.statusText);
+    } else {
+        response = request.responseText;
+    }
+    return response;
+}
+const data = JSON.parse(getQuote());
+console.log(data);
+function addText() {
+    let mas = data[0].quote.split(' ');
+    let countOfLines = Math.ceil(mas.length / 7);
+    ctx.textAlign = 'center';
+    for (var i = 0; i < countOfLines; i++) {
+        ctx.fillText(masToString(mas.slice(i * 7, (i + 1) * 7)), 300, 100 + 200 / (countOfLines + 1) * (i + 1))
+    }
+    ctx.textAlign = 'right';
+    ctx.fillText('(c) ' + data[0].character, 590, 380);
+}
+
+function fillText() {
+    ctx.font = 'Bold 25px Nautilus';
+
+    ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+    ctx.fillRect(0, 0, 1000, 800);
+    ctx.fillStyle = "white";
+    ctx.Baseline = "top";
+    addText();
+}
+
+function masToString(mas) {
+    let str = '';
+    for (let i = 0; i < mas.length; i++) {
+        str = str + mas[i] + ' '
+    }
+    return str;
+
+}
+
+canvas.onclick = function () {
+    let dataURL = canvas.toDataURL("image/jpeg");
+    let link = document.createElement("a");
+    document.body.appendChild(link);
+    link.href = dataURL;
+    link.download = "Quote.jpg";
+    link.click();
+    document.body.removeChild(link);
+
+};
