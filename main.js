@@ -4,8 +4,6 @@ let ctx  = canvas.getContext('2d');
 canvas.width = 600;
 canvas.height = 400;
 
-// let path = 'https://source.unsplash.com/collection/1538150/';
-
 function img(){
 img_url = 'https://source.unsplash.com/collection/1538150/';
 
