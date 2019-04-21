@@ -87,6 +87,8 @@ function masToString(mas) {
 
 }
 
+setTimeout(fillText, 3000);
+
 canvas.onclick = function () {
     let dataURL = canvas.toDataURL("image/jpeg");
     let link = document.createElement("a");
